@@ -6,7 +6,9 @@ const cityInput = document.querySelector('#city-input')
 const searchBtn = document.querySelector('#search')
 
 const showImage = data => {
-    console.log(data)
+    document.querySelector('.background-image').style.background= `url(${data.hits[0].largeImageURL})no-repeat`
+    console.log(data.hits[0])
+   
 }
 
 const getImageCity =  async text => {
@@ -75,3 +77,4 @@ const showWeatherData =  data => {
 
 searchBtn.addEventListener('click', getWeatherCity)
 cityInput.addEventListener('keyup', getWeatherByEnter)
+

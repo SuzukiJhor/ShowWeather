@@ -19,9 +19,7 @@ body{
     height: 100vh;
     background-size: cover !important;
     align-items: center;
-    justify-content: center;
-    /* background: url(https://pixabay.com/get/ge7b9fdf961789598bd766d668705d713bea702b9542e25c7295eb11fca0e30309ab8f47fd967182860fc814eb7c7e0df19e6dc9d0c00b9859e01c6a8b4da1117_1280.jpg) no-repeat; */
-    
+    justify-content: center;    
 }
 
 .hide{

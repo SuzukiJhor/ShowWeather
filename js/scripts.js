@@ -6,7 +6,16 @@ let cityInput = document.querySelector("#city-input");
 const searchBtn = document.querySelector("#search");
 const weatherData = document.querySelector("#weather-data");
 
-const showImage = (data) => {
+const showImage =  async (data) => {
+  const imageData = data.hits;
+  
+  if (imageData.length == 0) {
+    document.querySelector(
+      ".background-image"
+    ).style.background = `url(/assets/notFound.jpg)`;
+    return;
+  }
+
   document.querySelector(
     ".background-image"
   ).style.background = `url(${data.hits[0].largeImageURL})no-repeat`;
@@ -20,24 +29,29 @@ const getImageCity = async (text) => {
   return data;
 };
 
-const getWeatherCity = async (event) => {
-  event.preventDefault();
-  const city = cityInput.value;
-  const data = await getWeatherData(city);
-  const imageData = await getImageCity(city);
-  showWeatherData(data);
-  showImage(imageData);
-};
+const getWeatherByEvent = async event =>{
+  event.preventDefault()
+  let city;
 
-const getWeatherByEnter = async (event) => {
-  if (event.code === "Enter") {
-    const city = event.target.value;
-    const data = await getWeatherData(city);
-    const imageData = await getImageCity(city);
-    showWeatherData(data);
-    showImage(imageData);
+  if(event.type === 'keyup'){
+
+    if(event.code === "Enter" || event.code === 'NumpadEnter'){
+      city = event.target.value
+
+    }else{
+      return
+    }
   }
-};
+  if(event.type === 'click'){
+    city = cityInput.value
+  }
+
+  const data = await getWeatherData(city)
+  const imageData = await getImageCity(city)
+  showImage(imageData)
+  showWeatherData(data)
+
+}
 
 const getWeatherData = async (city) => {
   const apiWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiWeatherKey}`;
@@ -48,15 +62,15 @@ const getWeatherData = async (city) => {
 };
 
 const showWeatherData = (data) => {
-  
+
   if (data.cod == "404") {
     alert("cidade não encontrada");
     cityInput.value = "";
-    return
+    return 
   }
   if (data.cod == "400") {
     alert("campo vazio, digite o nome de alguma cidade por favor!");
-    return
+    return 
   }
 
   document.querySelector("#city").innerText = data.name;
@@ -86,5 +100,6 @@ const showWeatherData = (data) => {
   weatherData.classList.remove("hide");
 };
 
-searchBtn.addEventListener("click", getWeatherCity);
-cityInput.addEventListener("keyup", getWeatherByEnter);
+searchBtn.addEventListener("click", getWeatherByEvent);
+cityInput.addEventListener("keyup", getWeatherByEvent);
+

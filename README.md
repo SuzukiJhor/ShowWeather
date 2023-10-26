@@ -1,5 +1,5 @@
 # ShowWeather
-Usa-se o parametro de entrada, retorna dados da API OpenWeather com informações especificas sobre o clima como <br> Temperatura, velocidade do vento, humidade e estado. <br><br>
+Se usa o parametro de entrada, retorna dados da API OpenWeather com informações especificas sobre o clima como <br> Temperatura, velocidade do vento, humidade e estado. <br><br>
 Projeto desenvolvido com HTML, CSS e Vanilla JavaScript.
 
 ## :hammer: Apresentação
